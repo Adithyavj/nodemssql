@@ -20,11 +20,19 @@ router.use((request, response, next) => {
     next();
 })
 
-// GET: on /orders endpoint
+// GET: all orders
 router.route('/orders').get((request, response) => {
 
     dboperations.getOrders().then(result => {
-        // console.log(result);
+        response.json(result[0]);
+    })
+
+})
+
+// GET : order by Id
+router.route('/order/:id').get((request, response) => {
+
+    dboperations.getOrder(request.params.id).then(result => {
         response.json(result[0]);
     })
 
