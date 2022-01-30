@@ -38,6 +38,16 @@ router.route('/order/:id').get((request, response) => {
 
 })
 
+// POST : add new order
+router.route('/orders').post((request, response) => {
+
+    let order = { ...request.body }; // restructuring request body to order
+    dboperations.addOrder(order).then(result => {
+        response.status(201).json(result);
+    })
+
+})
+
 var port = process.env.PORT || 8090;
 app.listen(port);
 console.log('Order API is running at', + port);
